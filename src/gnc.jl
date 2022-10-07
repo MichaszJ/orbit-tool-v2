@@ -22,8 +22,8 @@ function determine_eccentric_anomaly(eccentricity, mean_anomaly; tolerance=1e-8)
     return eccentric_anomaly
 end
 
-function geocentric_state_vector_transform(angular_momentum, orbital_elements; mu=398600)
-    h = angular_momentum
+function geocentric_state_vector_transform(h, orbital_elements; mu=398600)
+    # h = angular_momentum
     e, i, asc, arg, theta = orbital_elements
 
     p⃗_perifocal = ((h^2 / mu) / (1 + e * cos(theta))) * [cos(theta); sin(theta); 0]

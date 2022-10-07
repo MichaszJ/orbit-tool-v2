@@ -13,7 +13,7 @@ row([
 
     cell(class="st-module", [
         p("Inclination: {{inclination}}°")
-        slider(0:1:360, :inclination; label=true)
+        slider(-180:1:180, :inclination; label=true)
     ])
 ])
 
@@ -39,6 +39,11 @@ row([
         h5("Ground Track")
         plot(:ground_track_plot)
     ])
+
+    cell(class="st-module", [
+        h5("Orbit")
+        plot(:orbit_plot)
+    ])
 ])
 
 row([
@@ -47,7 +52,7 @@ row([
         slider(0:0.25:30, :t_final; label=true)
     ])
     cell(class="st-module", [
-        p("Number of Steps: {{anum_steps}}")
-        slider(100:10:1000, :anum_steps; label=true)
+        p("Number of Steps: {{app_num_steps}}")
+        slider(100:10:1000, :app_num_steps; label=true)
     ])
 ])

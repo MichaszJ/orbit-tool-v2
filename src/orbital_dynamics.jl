@@ -139,6 +139,29 @@ function diffeq_two_body(initial_conditions, time_span, params; solver_args...)
 	return solution
 end;
 
+function diffeq_two_body_simple(initial_conditions, time_span, params; solver_args...)
+    function differential_system(u, p, t)
+        x, y, z, vx, vy, vz = u
+        μ = p
+
+        r = sqrt(x^2 + y^2 + z^2)
+
+        return SA[
+            vx,
+            vy,
+            vz,
+            -μ * x / r^3,
+            -μ * y / r^3,
+            -μ * z / r^3
+        ]
+    end
+
+    problem = ODEProblem(differential_system, initial_conditions, time_span, params)
+    solution = solve(problem; solver_args...)
+
+    return solution
+end
+
 function diffeq_three_body(initial_conditions, time_span, params; solver_args...)
 	function differential_system!(du, u, p, t)
         # unpacking initial conditions and parameters
